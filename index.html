@@ -110,15 +110,16 @@
             title.className = 'title';
             title.innerHTML = spell.title; // Use innerHTML to allow for HTML formatting
             card.appendChild(title);
+            const tags = document.createElement('span');
 
             spell.contents.forEach(content => {
                 const element = document.createElement('div');
-
                 // Format content for HTML
                 let formattedContent = content
                     .replace(/<b>text \| Cover<\/b>|<b>Cover<\/b>/g, '<b>Cover</b>')
                     .replace(/(\bd\d+|\d+d\d+\b)/g, '<b>$1</b>') // Bold dice references
                     .replace(/<a\b[^>]*>(.*?)<\/a>/ig, "$1")
+                    .replace('description | Cantrip Upgrade | ', '')
                     .replace(/\b(Strength|Dexterity|Constitution|Wisdom|Intelligence|Charisma)\b/g, '<b>$1</b>'); // Bold attributes
                 
                 if (formattedContent.indexOf('bullet') !== -1){
@@ -153,7 +154,18 @@
                     card.appendChild(element);
                 }
             });
+            
+            let tagsString = '';
+            spell.tags.forEach(tag => {
+                spell.tags.forEach(tag => {
+                    tagsString += tag + ' ' 
+                })
+            })
+            tags.innerHTML = tagsString.trimRight();
+            const hr = document.createElement('hr');
 
+            card.appendChild(hr);
+            card.appendChild(tags);
             container.appendChild(card);
         });
     }
