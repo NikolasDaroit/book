@@ -198,9 +198,6 @@
     document.querySelectorAll('.levelFilter').forEach(checkbox => {
         checkbox.addEventListener('change', filterSpells);
     });
-
-    // Initial render
-    renderCards(spells);
 </script>
 <script>
     if ('serviceWorker' in navigator) {
@@ -243,7 +240,7 @@
                         // Load new spells
                         Array.prototype.push.apply(spells, data);
                         // Here you can call a function to use the loaded spells
-                        console.log(spells); // Example: logging the loaded spells
+                        renderCards(spells);
                     })
                     .catch(error => console.error('Error loading the JSON file:', error));
             }
