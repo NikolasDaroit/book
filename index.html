@@ -61,7 +61,6 @@
 
 
 <script>
-    const spells = [];
     document.querySelectorAll('.levelFilter').forEach(checkbox => {
         checkbox.removeEventListener('change', filterSpells); // Remove old listener
         checkbox.addEventListener('change', filterSpells); // Add new listener
