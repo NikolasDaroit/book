@@ -183,13 +183,14 @@
 
         const filteredSpells = spells.filter(spell => {
             const spellTitleMatch = spell.title.toLowerCase().includes(query);
+            const spellTagsMatch = spell.tags.filter((t) =>  t.toLowerCase().includes((query).toLowerCase()));
             // Updated logic to handle cantrip level matching
             const spellLevelMatch = spell.tags.some(tag => {
                 const tagLower = tag.toLowerCase();
                 if (tagLower === "cantrips") return selectedLevels.includes("cantrips level");
                 return selectedLevels.includes(tagLower);
             });
-            return spellTitleMatch && (selectedLevels.length === 0 || spellLevelMatch);
+            return (spellTitleMatch || spellTagsMatch) && (selectedLevels.length === 0 || spellLevelMatch);
         });
 
         renderCards(filteredSpells);
