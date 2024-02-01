@@ -62,7 +62,10 @@
 
 <script>
     const spells = [];
-    
+    document.querySelectorAll('.levelFilter').forEach(checkbox => {
+        checkbox.removeEventListener('change', filterSpells); // Remove old listener
+        checkbox.addEventListener('change', filterSpells); // Add new listener
+    });
     function compareLevels(a, b) {
         if (a === "Cantrips") return -1;
         if (b === "Cantrips") return 1;
@@ -161,15 +164,6 @@
 
         // Add the event listener to the new input element
         newInput.addEventListener('input', filterSpells);
-
-        // Recreate checkboxes for filtering since spells have changed
-        createLevelCheckboxes(extractAndSortLevels(spells));
-
-        // Update event listeners for each checkbox
-        document.querySelectorAll('.levelFilter').forEach(checkbox => {
-            checkbox.removeEventListener('change', filterSpells); // Remove old listener
-            checkbox.addEventListener('change', filterSpells); // Add new listener
-        });
     }
 
     function filterSpells() {
