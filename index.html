@@ -44,7 +44,16 @@
 <input type="text" id="searchInput" placeholder="Search for spells...">
 
 <div class="filter-section">
-    <!-- Checkboxes will be inserted here by JavaScript -->
+    <input type="checkbox" class="levelFilter" value="cantrips level"> cantrips level
+    <input type="checkbox" class="levelFilter" value="1st level"> 1st level
+    <input type="checkbox" class="levelFilter" value="2nd level"> 2nd level
+    <input type="checkbox" class="levelFilter" value="3rd level"> 3rd level
+    <input type="checkbox" class="levelFilter" value="4th level"> 4th level
+    <input type="checkbox" class="levelFilter" value="5th level"> 5th level
+    <input type="checkbox" class="levelFilter" value="6th level"> 6th level
+    <input type="checkbox" class="levelFilter" value="7th level"> 7th level
+    <input type="checkbox" class="levelFilter" value="8th level"> 8th level
+    <input type="checkbox" class="levelFilter" value="9th level"> 9th level
 </div>
 
 <div id="cardsContainer"></div>
@@ -75,16 +84,7 @@
         return Array.from(levels).sort(compareLevels);
     }
 
-    function createLevelCheckboxes(levels) {
-        const container = document.querySelector('.filter-section');
-        levels.forEach(level => {
-            const label = document.createElement('label');
-            label.className = 'filter-item';
-            const formattedLevel = level.includes("level") ? level : level + " level"; // Ensure level text consistency
-            label.innerHTML = `<input type="checkbox" class="levelFilter" value="${formattedLevel.toLowerCase()}"> ${formattedLevel}`;
-            container.appendChild(label);
-        });
-    }
+
     function renderCards(spells) {
          // Sort spells by level, with cantrips first
         const sortedSpells = spells.sort((a, b) => {
