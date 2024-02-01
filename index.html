@@ -157,9 +157,7 @@
             
             let tagsString = '';
             spell.tags.forEach(tag => {
-                spell.tags.forEach(tag => {
-                    tagsString += tag + ' ' 
-                })
+                tagsString += tag + ' ' 
             })
             tags.innerHTML = tagsString.trimRight();
             const hr = document.createElement('hr');
