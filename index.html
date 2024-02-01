@@ -190,14 +190,6 @@
         const numLevelB = parseInt(levelB) || 0;
         return numLevelA - numLevelB; // Compare numeric levels
     }
-    document.getElementById('searchInput').addEventListener('input', filterSpells);
-
-    const levels = extractAndSortLevels(spells);
-    createLevelCheckboxes(levels);
-
-    document.querySelectorAll('.levelFilter').forEach(checkbox => {
-        checkbox.addEventListener('change', filterSpells);
-    });
 </script>
 <script>
     if ('serviceWorker' in navigator) {
@@ -241,6 +233,16 @@
                         Array.prototype.push.apply(spells, data);
                         // Here you can call a function to use the loaded spells
                         renderCards(spells);
+                        document.getElementById('searchInput').removeEventListener('input', filterSpells);
+                        document.getElementById('searchInput').addEventListener('input', filterSpells);
+
+                        const levels = extractAndSortLevels(spells);
+                        createLevelCheckboxes(levels);
+
+                        document.querySelectorAll('.levelFilter').forEach(checkbox => {
+                            checkbox.removeEventListener('change', filterSpells);
+                            checkbox.addEventListener('change', filterSpells);
+                        });
                     })
                     .catch(error => console.error('Error loading the JSON file:', error));
             }
