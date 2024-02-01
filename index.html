@@ -215,9 +215,9 @@
     
     document.addEventListener('DOMContentLoaded', function() {
         const jsonSelector = document.getElementById('jsonSelector');
-        const spells = []; // Array to hold the spells data
-    
-        // Fetch the manifest file
+
+        // Remove the local declaration of `spells` to use the global `spells` array
+        // fetch the manifest file
         fetch('spellist/manifest.json')
             .then(response => response.json())
             .then(files => {
@@ -228,7 +228,7 @@
                 });
             })
             .catch(error => console.error('Error loading manifest:', error));
-    
+
         // Fetch and load the selected JSON file
         jsonSelector.addEventListener('change', function() {
             if (this.value) {
@@ -244,6 +244,10 @@
                         // Re-render cards with the new spells list
                         renderCards(spells);
 
+                        // Reset input and checkboxes to default state before applying new event listeners
+                        document.getElementById('searchInput').value = '';
+                        document.querySelectorAll('.levelFilter').forEach(checkbox => checkbox.checked = false);
+
                         // Update event listeners for the filter
                         updateFilterEventListeners();
                     })
@@ -251,6 +255,7 @@
             }
         });
     });
+
     </script>
 </body>
 </html>
