@@ -221,7 +221,7 @@
         const spells = []; // Array to hold the spells data
     
         // Fetch the manifest file
-        fetch('/spellist/manifest.json')
+        fetch('spellist/manifest.json')
             .then(response => response.json())
             .then(files => {
                 // Populate the <select> element with file names
